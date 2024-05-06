@@ -1,0 +1,51 @@
+<mujoco>
+    <compiler coordinate="local" />
+    <option timestep="0.001" integrator="RK4" gravity="0 0 -9.81">
+		<flag sensornoise="disable" contact="enable" energy="enable"/>
+	</option>
+
+    <worldbody>
+        <geom type="plane" size="25 2 0.01" rgba="0 0.9 0 1"/>
+        <body name="SLIP_biped" pos="0 0 2.5">
+            <joint name="x" type="slide" pos="0 0 0" axis="1 0 0" />
+            <joint name="z" type="slide" pos="0 0 0" axis="0 0 1" />
+            <geom type="sphere" size="0.12" mass="1" rgba="0.9 0 0 1"/>
+            <!--<body name="thigh1" pos="0 -0.1 -0.3">-->
+            <body name="thigh1" pos="0 -0.1 -0.25">
+                <!--<joint name="hip_joint1" type="hinge" pos="0 0 0.3" axis="0 -1 0" damping="1"/>-->
+                <!--<geom type="cylinder" size="0.05 0.3" rgba="0.5 0.5 0.5 1" mass="0.25"/>-->
+                <joint name="hip_joint1" type="hinge" pos="0 0 0.25" axis="0 -1 0" damping="0.1"/>
+                <geom type="cylinder" size="0.05 0.25" rgba="0.5 0.5 0.5 1" mass="0.25"/>
+                <!--<body name="shin_calf1" pos="0 0 -0.8">-->
+                <body name="shin_calf1" pos="0 0 -0.75">
+                    <!--<joint name="knee_joint1" type="slide" pos="0 0 0.5" axis="0 0 1" stiffness="1000"/>-->
+                    <!--<geom type="cylinder" size="0.01 0.3" rgba="0.9 0.9 0.9 1" mass="0.15"/>-->
+                    <joint name="knee_joint1" type="slide" pos="0 0 0.5" axis="0 0 1" stiffness="1000"/>
+                    <geom type="cylinder" size="0.01 0.5" rgba="0.9 0.9 0.9 1" mass="0.15"/>
+                </body>    
+            </body>
+            <!--<body name="thigh2" pos="0 0.1 -0.3">
+                <joint name="hip_joint2" type="hinge" pos="0 0 0.3" axis="0 -1 0" damping="1"/>
+                <geom type="cylinder" size="0.05 0.3" rgba="0.5 0.5 0.5 1" mass="0.25" />
+                <body name="shin_calf2" pos="0 0 -0.8">
+                    <joint name="knee_joint2" type="slide" pos="0 0 0.5" axis="0 0 1" stiffness="1000" />
+                    <geom type="cylinder" size="0.01 0.5" rgba="0.9 0.9 0.9 1" mass="0.15"/>   
+                </body>
+            </body> -->
+            <body name="thigh2" pos="0 0.1 -0.25">
+                <joint name="hip_joint2" type="hinge" pos="0 0 0.25" axis="0 -1 0" damping="0.1"/>
+                <geom type="cylinder" size="0.05 0.25" rgba="0.5 0.5 0.5 1" mass="0.25" />
+                <body name="shin_calf2" pos="0 0 -0.75">
+                    <joint name="knee_joint2" type="slide" pos="0 0 0.5" axis="0 0 1" stiffness="1000" />
+                    <geom type="cylinder" size="0.01 0.5" rgba="0.9 0.9 0.9 1" mass="0.15"/>   
+                </body>
+            </body>      
+        </body>
+    </worldbody>
+    
+    <actuator>
+        <motor ctrllimited="true" ctrlrange="-1. 1." gear="20." joint="hip_joint1" />
+        <motor ctrllimited="true" ctrlrange="-1. 1." gear="20." joint="hip_joint2" />
+    </actuator>
+    
+</mujoco>
